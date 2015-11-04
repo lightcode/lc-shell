@@ -1,0 +1,389 @@
+" This must be first, because it changes other options as side effect
+set nocompatible
+
+filetype off
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Vundle
+Plugin 'gmarik/Vundle.vim'
+
+" User interface
+Plugin 'tomasr/molokai'                 " Color scheme
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kien/ctrlp.vim'                 " Fuzzy search
+Plugin 'bling/vim-airline'              " Custom status bar
+
+" Fast coding
+Plugin 'scrooloose/nerdcommenter'       " Comments
+"Plugin 'Raimondi/delimitMate'          " Close quotes
+Plugin 'ervandew/supertab'              " Code completion
+Plugin 'godlygeek/tabular'              " Alignment
+Plugin 'tpope/vim-fugitive'             " Git
+Plugin 'airblade/vim-gitgutter'         " Git
+Plugin 'scrooloose/syntastic'           " Code checker
+
+" Language specific plugins
+Plugin 'chase/vim-ansible-yaml'         " Ansible
+Plugin 'jelera/vim-javascript-syntax'   " JavaScript
+Plugin 'plasticboy/vim-markdown'        " Markdown
+Plugin 'davidhalter/jedi-vim'           " Python
+Plugin 'fatih/vim-go'                   " Go
+Plugin 'lepture/vim-jinja'              " Jinja
+Plugin 'ekalinin/Dockerfile.vim'        " Docker
+
+call vundle#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins Configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" --> 'davidhalter/jedi-vim'
+
+let g:jedi#show_call_signatures = "1"
+
+
+" ------------------------------------------
+
+" --> 'plasticboy/vim-markdown'
+
+let g:vim_markdown_folding_disabled = 1
+
+
+" ------------------------------------------
+
+" --> 'kien/ctrlp.vim'
+
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:12,results:12'
+
+" Setup some default ignores
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn))$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
+
+" If available, use ag instead of grep to do research
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+
+" ------------------------------------------
+
+" --> 'bling/vim-airline'
+
+let g:airline_theme = 'wombat'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+set noshowmode
+
+" ------------------------------------------
+
+" --> 'Raimondi/delimitMate'
+
+" let expand when we press enter key
+let delimitMate_expand_cr = 1
+
+" ------------------------------------------
+
+" --> 'scrooloose/syntastic'
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+
+" Here we can make check active or passive.
+" I make `rst` checking passive because it doesn't
+" handle Sphinx well.
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": [],
+    \ "passive_filetypes": ["rst"] }
+
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
+
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_go_checkers = ['go']
+let g:syntastic_javascript_checkers = ['jshint']
+
+filetype plugin on
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Search
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Set show matching parenthesis
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=1
+" Ignore case when searching
+set ignorecase
+" Ignore case if search pattern is all lowercase, case-sensitive otherwise
+set smartcase
+" Insert tabs on the start of a line according to shiftwidth, not tabstop
+set smarttab
+" Highlight search terms
+set hlsearch
+" Show search matches as you type
+set incsearch
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+" Use spaces instead of tabs
+set expandtab
+" Always set autoindenting on
+set autoindent
+" Copy the previous indentation on autoindenting
+set copyindent
+" Use multiple of shiftwidth when indenting with '<' and '>'
+set shiftround
+" Don't wrap lines
+set nowrap
+" Number of spaces to use for autoindenting
+set shiftwidth=4
+" A tab is four spaces
+set tabstop=4
+" Enable indent
+filetype indent on
+" Disable auto-comments
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" Show trailing spaces
+set list
+set listchars=tab:>.,trail:•,extends:#,nbsp:.
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set timeoutlen=1000
+set ttimeoutlen=0
+" Always show line numbers
+set number
+" This allows buffers to be hidden if you've modified a buffer.
+set hidden
+" Always show current position
+set ruler
+" Height of the command bar
+set cmdheight=1
+" Remember more commands and search history
+set history=1000
+" Use many muchos levels of undo
+set undolevels=1000
+" Change the terminal's title
+set title
+" Don't beep
+set visualbell
+" Don't beep
+set noerrorbells
+" Show cmd
+set showcmd
+" Visual autocomplete for command menu
+set wildmenu
+set wildignore=*.swp,*.bak,*.pyc,*.class
+" don't redraw when don't have to
+set lazyredraw
+" keep at least 5 lines above/below
+set scrolloff=5
+" keep at least 5 lines left/right
+set sidescrolloff=5
+" we have a fast terminal
+set ttyfast
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Theme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set laststatus=2
+
+" Enable syntax highlighting
+if &t_Co >= 256 || has("gui_running")
+    let g:rehash256 = 1
+    silent! colorscheme molokai
+endif
+
+set background=dark
+
+if &t_Co > 2 || has("gui_running")
+    " switch syntax highlighting on, when the terminal has colors
+    syntax enable
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" Hide highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
+
+" Close buffer
+nnoremap <leader>q :GracefulQuit<cr>
+
+" Fast moving between buffers
+nnoremap <silent> <leader><Left> :bprevious<cr>
+nnoremap <silent> <leader><Right> :bnext<cr>
+
+" Toggle copy/paste mode
+nnoremap <silent> <C-k><C-p> :call ToggleCopyPaste()<cr>
+inoremap <C-k><C-p> <C-O>:call ToggleCopyPaste()<cr>
+
+" Toggle list on/off
+nnoremap <silent> <C-k><C-l> :set list!<cr>
+inoremap <silent> <C-k><C-l> <C-o>:set list!<cr>
+
+" Toggle relative number on/off
+nnoremap <silent> <C-k><C-n> :set relativenumber!<cr>
+inoremap <silent> <C-k><C-n> <C-o>:set relativenumber!<cr>
+
+" Mapping for NERD Commenter
+nnoremap <silent> <C-k><C-c> :call NERDComment(0, "toggle")<cr>
+inoremap <C-k><C-c> <C-o>:call NERDComment(0, "toggle")<cr>
+vnoremap <silent> <C-k><C-c> :call NERDComment(0, "toggle")<cr>
+
+" Toggle NERDTreeTabs
+nnoremap <silent> <C-k><C-k> :NERDTreeTabsToggle<cr>
+
+" Check the code with syntastic
+nnoremap <silent> cc :SyntasticCheck<cr> :Errors<cr>
+nnoremap <silent> cq :lclose<cr>
+nnoremap <silent> cp :lprevious<cr>
+nnoremap <silent> cn :lnext<cr>
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Language specific configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+augroup LanguageConfiguration
+    autocmd!
+
+    autocmd VimEnter * highlight clear SignColumn
+
+    autocmd FileType go         setlocal listchars=tab:\ \ ,
+    autocmd FileType java       setlocal noexpandtab formatprg=par\ -w80\ -T4 listchars=tab:\ \ ,
+    autocmd FileType php        setlocal formatprg=par\ -w80\ -T4
+    autocmd FileType yaml       setlocal tabstop=2 shiftwidth=2 softtabstop=2 commentstring=#\ %s
+    autocmd FileType ruby       setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType css        setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType html,xml   setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType python     setlocal colorcolumn=79
+    autocmd FileType python     setlocal completeopt-=preview
+    autocmd FileType make       setlocal noexpandtab nolist
+    autocmd FileType sh         setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType rst        setlocal tabstop=3 shiftwidth=3 softtabstop=3 nolist colorcolumn=120
+    autocmd FileType tex        setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType text       setlocal textwidth=0
+
+    autocmd FileType rst,mkd,tex,text  :call TextMode()
+augroup END
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! TextMode()
+    setlocal wrap
+    setlocal nolist
+    setlocal linebreak
+endfunc
+
+function! EnablePasteMode()
+    setlocal paste
+    setlocal nonumber
+    setlocal nolist
+    :GitGutterDisable
+endfunc
+
+function! DisablePasteMode()
+    setlocal nopaste
+    setlocal number
+    setlocal list
+    :GitGutterEnable
+endfunc
+
+function! ToggleCopyPaste()
+    if(&paste == 0)
+        call EnablePasteMode()
+    else
+        call DisablePasteMode()
+    endif
+endfunc
+
+function! ClearPasteMode()
+    if(&paste == 1)
+        call DisablePasteMode()
+    endif
+endfunc
+
+autocmd BufLeave * :call ClearPasteMode()
+autocmd InsertLeave * :call ClearPasteMode()
+
+
+function! CountListedBuffers()
+    let cnt = 0
+    for nr in range(1,bufnr("$"))
+        if buflisted(nr) && ! empty(bufname(nr))
+            let cnt += 1
+        endif
+    endfor
+    return cnt
+endfunction
+
+
+function! QuitIfNoBuffer(bang)
+    if CountListedBuffers() <= 1
+        if a:bang
+            :quit!
+        else
+            :quit
+        endif
+    else
+        if a:bang
+            :bdelete!
+        else
+            :bdelete
+        endif
+    endif
+endfunc
+
+command -nargs=* -range -bang GracefulQuit call QuitIfNoBuffer(<bang>0)
+
+" Hook to replace :q with the GracefulQuit command
+" cabbrev    <expr>    q    ((getcmdtype() == ':' && getcmdpos() <= 2)? 'GracefulQuit' : 'q')
+
+" Disable blinking when we reach the first line
+autocmd GUIEnter * set vb t_vb=
+autocmd VimEnter * set vb t_vb=

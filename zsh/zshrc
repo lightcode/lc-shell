@@ -1,0 +1,57 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Source all scripts in ~/.zsh.d
+state_nullglob=$(setopt | grep -c nullglob)
+setopt nullglob
+if [ -d "${HOME}/.zsh.d" ]; then
+  for script in ${HOME}/.zsh.d/*; do
+    source "$script"
+  done
+fi
+[ "$state_nullglob" -eq 0 ] && unsetopt nullglob
+unset state_nullglob
+
+
+#####################
+# ENV
+#####################
+
+if [[ "$TERM" == "xterm" ]]; then
+  TERM="xterm-256color"
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH="$PATH:$HOME/.local/bin"
+fi
+
+export EDITOR="vim"
+
+
+#####################
+# ZLE
+#####################
+
+# alt+g: execute 'git status'
+bindkey -s '\eg' '^Ugws^M'
+
+# alt+G: execute 'git status .'
+bindkey -s '\eG' '^Ugws .^M'
+
+
+#####################
+# ALIAS
+#####################
+
+alias ll='k -hA --no-vcs'
+alias l='k -h --no-vcs'
+alias reloadzsh='source ~/.zshrc && rehash'
