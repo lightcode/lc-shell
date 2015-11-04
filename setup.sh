@@ -41,7 +41,7 @@ _setup_zsh() {
   fi
 
   for file in zlogin zlogout zpreztorc zprofile zshenv zshrc; do
-    _install_link "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogin" "${HOME}/.zlogin"
+    _install_link "${ZDOTDIR:-$HOME}/.zprezto/runcoms/$file" "${HOME}/.$file"
   done
 }
 
