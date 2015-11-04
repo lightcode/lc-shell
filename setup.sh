@@ -36,12 +36,13 @@ _setup_zsh() {
   _install_link "${ROOT}/zsh/zshrc" "$ZSHRC_PATH"
 
   # Install zprezto
-  _install_link "${ROOT}/prezto/runcoms/zlogin" ".zlogin"
-  _install_link "${ROOT}/prezto/runcoms/zlogout" ".zlogout"
-  _install_link "${ROOT}/prezto/runcoms/zpreztorc" ".zpreztorc"
-  _install_link "${ROOT}/prezto/runcoms/zprofile" ".zprofile"
-  _install_link "${ROOT}/prezto/runcoms/zshenv" ".zshenv"
-  _install_link "${ROOT}/prezto/runcoms/zshrc" ".zshrc"
+  if [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
+    git clone --recursive https://github.com/lightcode/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+  fi
+
+  for file in zlogin zlogout zpreztorc zprofile zshenv zshrc; do
+    _install_link "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogin" "${HOME}/.zlogin"
+  done
 }
 
 _setup_tmux() {
