@@ -1,5 +1,12 @@
+Dependencies :
+
+* git
+* zsh
+* tmux
+
+
 To install lc-shell :
 
 ```console
-$ git clone --recursive https://github.com/lightcode/lc-shell.git "${HOME}/lc-shell"
+$ git clone https://github.com/lightcode/lc-shell.git "${HOME}/lc-shell"
 ```

@@ -29,6 +29,16 @@ _install_dir() {
 
 _setup_vim() {
   _install_link "${ROOT}/vim/vimrc" "$VIMRC_PATH"
+
+  # Install Vundle
+  _install_dir "${HOME}/.vim/bundle"
+
+  if [ ! -d "${HOME}/.vim/bundle/Vundle.vim" ]; then
+    git clone --depth=1 https://github.com/gmarik/Vundle.vim.git "${HOME}/.vim/bundle/Vundle.vim"
+  fi
+
+  vim +PluginClean\! +qall
+  vim +PluginInstall +qall
 }
 
 _setup_zsh() {
@@ -40,9 +50,11 @@ _setup_zsh() {
     git clone --recursive https://github.com/lightcode/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
   fi
 
-  for file in zlogin zlogout zpreztorc zprofile zshenv zshrc; do
+  for file in zlogin zlogout zprofile zshenv; do
     _install_link "${ZDOTDIR:-$HOME}/.zprezto/runcoms/$file" "${HOME}/.$file"
   done
+
+  _install_link "${ROOT}/zsh/zpreztorc" "${HOME}/.zpreztorc"
 }
 
 _setup_tmux() {
