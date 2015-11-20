@@ -291,6 +291,8 @@ augroup LanguageConfiguration
 
     autocmd VimEnter * highlight clear SignColumn
 
+    autocmd FileType plaintex   setlocal filetype=tex
+
     autocmd FileType css        setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType go         setlocal listchars=tab:\ \ ,
     autocmd FileType html,xml   setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -306,7 +308,7 @@ augroup LanguageConfiguration
     autocmd FileType text       setlocal textwidth=0
     autocmd FileType yaml       setlocal tabstop=2 shiftwidth=2 softtabstop=2 commentstring=#\ %s
 
-    autocmd FileType rst,mkd,tex,text  :call TextMode()
+    autocmd FileType mkd,rst,tex,text :call TextMode()
 augroup END
 
 
