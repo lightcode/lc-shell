@@ -46,6 +46,21 @@ call vundle#end()
 " => Plugins Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" --> 'fatih/vim-go'
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+if executable("goimports")
+    let g:go_fmt_command = "goimports"
+endif
+
+
+" ------------------------------------------
+
 " --> 'davidhalter/jedi-vim'
 
 let g:jedi#show_call_signatures = "1"
@@ -71,12 +86,12 @@ let g:ctrlp_custom_ignore = {
 \}
 
 " If available, use ag instead of grep to do research
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+if executable("ag")
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
 
@@ -118,9 +133,9 @@ let g:syntastic_mode_map = {
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_go_checkers = ['go']
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_python_checkers = ["flake8"]
+let g:syntastic_go_checkers = ["go", "golint", "govet"]
+let g:syntastic_javascript_checkers = ["jshint"]
 
 filetype plugin on
 
@@ -171,7 +186,7 @@ filetype indent on
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Show trailing spaces
 set list
-set listchars=tab:>.,trail:•,extends:#,nbsp:.
+set listchars=trail:•,extends:#,nbsp:.,tab:\ \ ,
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -291,22 +306,24 @@ augroup LanguageConfiguration
 
     autocmd VimEnter * highlight clear SignColumn
 
-    autocmd FileType plaintex   setlocal filetype=tex
+    autocmd FileType plaintex      setlocal filetype=tex
 
-    autocmd FileType css        setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType go         setlocal listchars=tab:\ \ ,
-    autocmd FileType html,xml   setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType java       setlocal noexpandtab formatprg=par\ -w80\ -T4 listchars=tab:\ \ ,
-    autocmd FileType make       setlocal noexpandtab nolist
-    autocmd FileType php        setlocal formatprg=par\ -w80\ -T4
-    autocmd FileType python     setlocal colorcolumn=79
-    autocmd FileType python     setlocal completeopt-=preview
-    autocmd FileType rst        setlocal tabstop=3 shiftwidth=3 softtabstop=3 nolist colorcolumn=120
-    autocmd FileType ruby       setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType sh         setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType tex        setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType text       setlocal textwidth=0
-    autocmd FileType yaml       setlocal tabstop=2 shiftwidth=2 softtabstop=2 commentstring=#\ %s
+    autocmd FileType go            nmap <Leader>gd <Plug>(go-doc)
+
+    autocmd FileType css           setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType html,xml      setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType java          setlocal noexpandtab formatprg=par\ -w80\ -T4
+    autocmd FileType make          setlocal noexpandtab nolist
+    autocmd FileType php           setlocal formatprg=par\ -w80\ -T4
+    autocmd FileType python        setlocal listchars=tab:>.,
+    autocmd FileType python        setlocal colorcolumn=79
+    autocmd FileType python        setlocal completeopt-=preview
+    autocmd FileType rst           setlocal tabstop=3 shiftwidth=3 softtabstop=3 colorcolumn=120
+    autocmd FileType ruby          setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType sh,zsh        setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType tex           setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType text          setlocal textwidth=0
+    autocmd FileType yaml          setlocal tabstop=2 shiftwidth=2 softtabstop=2 commentstring=#\ %s
 
     autocmd FileType mkd,rst,tex,text :call TextMode()
 augroup END
