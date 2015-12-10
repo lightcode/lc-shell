@@ -92,7 +92,6 @@ _setup_tmux() {
 
 
 _main() {
-
   while getopts u opt; do
     case "$opt" in
       u) UPDATE=1 ;;
@@ -105,6 +104,8 @@ _main() {
   _setup_vim
   _setup_zsh
   _setup_tmux
+
+  chsh -s /bin/zsh
 }
 
 _main "$*"
