@@ -37,7 +37,6 @@ _setup_lcshell() {
     git -C "$ROOT" pull -q || true
     echo >&2
   fi
-  _install_link "${ROOT}/lc-shell/update-lc-shell.zsh" "${ZSH_DROPIN_DIR}/update-lc-shell.zsh"
 }
 
 _setup_vim() {
@@ -83,6 +82,8 @@ _setup_zsh() {
   done
 
   _install_link "${ROOT}/zsh/zpreztorc" "${HOME}/.zpreztorc"
+
+  _install_link "${ROOT}/lc-shell/update-lc-shell.zsh" "${ZSH_DROPIN_DIR}/update-lc-shell.zsh"
 }
 
 _setup_tmux() {
