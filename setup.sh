@@ -18,8 +18,8 @@ _install_link() {
   if [ -L "$dest" ]; then
     rm -f "$dest"
   fi
-  ln -s "$src" "$dest"
-  echo >&2 " * Create link: $src -> $dest"
+  ln -s "$src" "$dest" && echo >&2 " * Create link: $src -> $dest" \
+    || echo >&2 "Cannot create link to $src"
 }
 
 _install_dir() {
@@ -30,11 +30,17 @@ _install_dir() {
   fi
 }
 
+_git_exec() {
+  local path="$1"
+  shift
+  git --work-tree="${path}" --git-dir="${path}/.git" $*
+}
+
 
 _setup_lcshell() {
   if [ "$UPDATE" -eq 1 ]; then
     echo >&2 -e "Trying to update this repo...\n"
-    git -C "$ROOT" pull -q || true
+    _git_exec "$ROOT" pull -q || true
     echo >&2
   fi
 }
@@ -47,7 +53,7 @@ _setup_vim() {
   echo >&2
   if [ -d "${HOME}/.vim/bundle/Vundle.vim" ] && [ "$UPDATE" -eq 1 ]; then
     echo >&2 -e "Updating Vundle...\n"
-    git -C "${HOME}/.vim/bundle/Vundle.vim" pull --depth=1 -q || true
+    _git_exec "${HOME}/.vim/bundle/Vundle.vim" pull --depth=1 -q || true
   elif [ ! -d "${HOME}/.vim/bundle/Vundle.vim" ]; then
     echo >&2 -e "Installing Vundle...\n"
     git clone --depth=1 https://github.com/gmarik/Vundle.vim.git "${HOME}/.vim/bundle/Vundle.vim"
@@ -70,7 +76,7 @@ _setup_zsh() {
   echo >&2
   if [ -d "${ZDOTDIR:-$HOME}/.zprezto" ] && [ "$UPDATE" -eq 1 ]; then
     echo >&2 -e "Updating Zprezto...\n"
-    git -C "${ZDOTDIR:-$HOME}/.zprezto" pull --depth=1 || true
+    _git_exec "${ZDOTDIR:-$HOME}/.zprezto" pull --depth=1 || true
   elif [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
     echo >&2 -e "Installing Zprezto...\n"
     git clone --depth=1 --recursive https://github.com/lightcode/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
