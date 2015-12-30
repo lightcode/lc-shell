@@ -110,8 +110,6 @@ _main() {
   _setup_vim
   _setup_zsh
   _setup_tmux
-
-  chsh -s /bin/zsh
 }
 
 _main "$*"
