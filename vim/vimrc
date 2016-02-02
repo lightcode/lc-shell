@@ -20,6 +20,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'                 " Fuzzy search
 Plugin 'bling/vim-airline'              " Custom status bar
+Plugin 'vim-airline/vim-airline-themes'
 
 " Fast coding
 Plugin 'scrooloose/nerdcommenter'       " Comments
