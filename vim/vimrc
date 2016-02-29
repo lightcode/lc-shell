@@ -16,8 +16,6 @@ Plugin 'gmarik/Vundle.vim'
 
 " User interface
 Plugin 'tomasr/molokai'                 " Color scheme
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'                 " Fuzzy search
 Plugin 'bling/vim-airline'              " Custom status bar
 Plugin 'vim-airline/vim-airline-themes'
@@ -291,9 +289,6 @@ inoremap <silent> <C-k><C-n> <C-o>:set relativenumber!<cr>
 nnoremap <silent> <C-k><C-c> :call NERDComment(0, "toggle")<cr>
 inoremap <C-k><C-c> <C-o>:call NERDComment(0, "toggle")<cr>
 vnoremap <silent> <C-k><C-c> :call NERDComment(0, "toggle")<cr>
-
-" Toggle NERDTreeTabs
-nnoremap <silent> <C-k><C-k> :NERDTreeTabsToggle<cr>
 
 " Check the code with syntastic
 nnoremap <silent> cc :SyntasticCheck<cr> :Errors<cr>
