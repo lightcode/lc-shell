@@ -34,8 +34,6 @@ if [ -d "$HOME/.local/bin" ]; then
   export PATH="$PATH:$HOME/.local/bin"
 fi
 
-export EDITOR="vim"
-
 
 #####################
 # ZLE
@@ -55,3 +53,20 @@ bindkey -s '\eG' '^Ugws .^M'
 alias ll='k -hA --no-vcs'
 alias l='k -h --no-vcs'
 alias reloadzsh='source ~/.zshrc && rehash'
+
+
+#####################
+# EDITOR
+#####################
+
+if which nvim &>/dev/null; then
+  EDITOR="nvim"
+elif which vim &>/dev/null; then
+  EDITOR="vim"
+else
+  EDITOR="vi"
+fi
+
+export EDITOR
+
+alias vim="$EDITOR"

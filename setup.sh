@@ -66,6 +66,12 @@ _setup_vim() {
   if [ "$UPDATE" -eq 1 ]; then
     vim +PluginUpdate +qall
   fi
+
+  # Links for neovim compatibility
+  XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
+  _install_dir "${XDG_CONFIG_HOME}"
+  _install_link "${HOME}/.vim" "${XDG_CONFIG_HOME}/nvim"
+  _install_link "${HOME}/.vimrc" "${XDG_CONFIG_HOME}/nvim/init.vim"
 }
 
 _setup_zsh() {
