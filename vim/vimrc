@@ -18,11 +18,10 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tomasr/molokai'                 " Color scheme
 Plugin 'kien/ctrlp.vim'                 " Fuzzy search
 Plugin 'bling/vim-airline'              " Custom status bar
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline-themes' " Themes for status bar
 
 " Fast coding
 Plugin 'scrooloose/nerdcommenter'       " Comments
-"Plugin 'Raimondi/delimitMate'          " Close quotes
 Plugin 'ervandew/supertab'              " Code completion
 Plugin 'godlygeek/tabular'              " Alignment
 Plugin 'tpope/vim-fugitive'             " Git
@@ -218,15 +217,15 @@ set showcmd
 " Visual autocomplete for command menu
 set wildmenu
 set wildignore=*.swp,*.bak,*.pyc,*.class
-" don't redraw when don't have to
+" Don't redraw when don't have to
 set lazyredraw
-" keep at least 5 lines above/below
+" Keep at least 5 lines above/below
 set scrolloff=5
-" keep at least 5 lines left/right
+" Keep at least 5 lines left/right
 set sidescrolloff=5
-" we have a fast terminal
+" We have a fast terminal
 set ttyfast
-" disable mouse in terminal
+" Disable mouse in terminal
 if !has("gui_running")
     set mouse=
 endif
@@ -247,7 +246,7 @@ endif
 set background=dark
 
 if &t_Co > 2 || has("gui_running")
-    " switch syntax highlighting on, when the terminal has colors
+    " Switch syntax highlighting on, when the terminal has colors
     syntax enable
 endif
 
@@ -409,9 +408,6 @@ function! QuitIfNoBuffer(bang)
 endfunc
 
 command -nargs=* -range -bang GracefulQuit call QuitIfNoBuffer(<bang>0)
-
-" Hook to replace :q with the GracefulQuit command
-" cabbrev    <expr>    q    ((getcmdtype() == ':' && getcmdpos() <= 2)? 'GracefulQuit' : 'q')
 
 " Disable blinking when we reach the first line
 autocmd GUIEnter * set vb t_vb=
