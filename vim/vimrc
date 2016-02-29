@@ -30,6 +30,7 @@ Plugin 'godlygeek/tabular'              " Alignment
 Plugin 'tpope/vim-fugitive'             " Git
 Plugin 'airblade/vim-gitgutter'         " Git
 Plugin 'scrooloose/syntastic'           " Code checker
+Plugin 'terryma/vim-multiple-cursors'   " Multiple cursors
 
 " Language specific plugins
 Plugin 'chase/vim-ansible-yaml'         " Ansible
