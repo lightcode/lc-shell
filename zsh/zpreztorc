@@ -42,6 +42,15 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'syntax-highlighting'
 
+
+#
+# Autosuggestions
+#
+
+# Set the query found color.
+# zstyle ':prezto:module:autosuggestions:color' found ''<Paste>
+
+
 #
 # Editor
 #
