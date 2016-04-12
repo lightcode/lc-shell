@@ -7,7 +7,7 @@ declare -r VIMRC_PATH="${HOME}/.vimrc"
 declare -r ZSHRC_PATH="${HOME}/.zshrc"
 declare -r ZSH_DROPIN_DIR="${HOME}/.zsh.d"
 
-declare -r ROOT=$(dirname $(realpath $0))
+declare -r ROOT=$(dirname $(readlink -f $0))
 
 declare -i UPDATE=0
 
