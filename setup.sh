@@ -33,7 +33,9 @@ _install_dir() {
 _git_exec() {
   local path="$1"
   shift
-  git --work-tree="${path}" --git-dir="${path}/.git" $*
+  pushd "${path}" >/dev/null
+  git $*
+  popd >/dev/null
 }
 
 
@@ -83,6 +85,7 @@ _setup_zsh() {
   if [ -d "${ZDOTDIR:-$HOME}/.zprezto" ] && [ "$UPDATE" -eq 1 ]; then
     echo >&2 -e "Updating Zprezto...\n"
     _git_exec "${ZDOTDIR:-$HOME}/.zprezto" pull --depth=1 || true
+    _git_exec "${ZDOTDIR:-$HOME}/.zprezto" submodule update --init --recursive || true
   elif [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
     echo >&2 -e "Installing Zprezto...\n"
     git clone --depth=1 --recursive https://github.com/lightcode/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
