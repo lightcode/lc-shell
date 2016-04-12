@@ -60,13 +60,13 @@ alias reloadzsh='source ~/.zshrc && rehash'
 #####################
 
 if which nvim &>/dev/null; then
-  EDITOR="nvim"
+  VISUAL="nvim"
 elif which vim &>/dev/null; then
-  EDITOR="vim"
+  VISUAL="vim"
 else
-  EDITOR="vi"
+  VISUAL="vi"
 fi
 
-export EDITOR
+export VISUAL EDITOR="$VISUAL"
 
 alias vim="$EDITOR"
