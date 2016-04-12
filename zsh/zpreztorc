@@ -24,32 +24,29 @@ zstyle ':prezto:*:*' color 'yes'
 # Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle ':prezto:load' pmodule \
-  'directory' \
-  'editor' \
   'environment' \
-  'git' \
-  'history' \
-  'history-substring-search' \
-  'prompt' \
-  'python' \
-  'spectrum' \
   'terminal' \
-  'tmux' \
+  'editor' \
+  'history' \
+  'directory' \
+  'spectrum' \
   'utility' \
-  'k' \
-  'docker' \
-  'archive' \
   'completion' \
-  'syntax-highlighting'
-
+  'prompt' \
+  'directory' \
+  'git' \
+  'syntax-highlighting' \
+  'history-substring-search' \
+  'tmux' \
+  'k' \
+  'docker'
 
 #
 # Autosuggestions
 #
 
 # Set the query found color.
-# zstyle ':prezto:module:autosuggestions:color' found ''<Paste>
-
+# zstyle ':prezto:module:autosuggestions:color' found ''
 
 #
 # Editor
@@ -138,8 +135,9 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
   'main' \
   'brackets' \
   'pattern' \
+  'line' \
+  'cursor' \
   'root'
-# 'cursor'
 
 # Set syntax highlighting styles.
 # zstyle ':prezto:module:syntax-highlighting' styles \
@@ -168,7 +166,7 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 # zstyle ':prezto:module:tmux:auto-start' local 'yes'
 
 # Auto start a session when Zsh is launched in a SSH connection.
-zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+# zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
 # Integrate with iTerm2.
 # zstyle ':prezto:module:tmux:iterm' integrate 'yes'
