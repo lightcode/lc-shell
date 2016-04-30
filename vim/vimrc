@@ -250,6 +250,10 @@ if &t_Co > 2 || has("gui_running")
     syntax enable
 endif
 
+" Don't color background: it add trailing whitespace
+" in xfce4-terminal
+highlight Normal ctermbg=none
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
