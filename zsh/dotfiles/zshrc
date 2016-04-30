@@ -1,0 +1,7 @@
+#
+# Executes commands at the start of an interactive session.
+#
+
+if [[ -s "${ZDOTDIR:-$HOME}/.lc-shell/zsh/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.lc-shell/zsh/init.zsh"
+fi

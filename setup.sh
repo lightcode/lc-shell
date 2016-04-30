@@ -5,7 +5,7 @@ set -e
 declare -r TMUX_CONF_PATH="${HOME}/.tmux.conf"
 declare -r VIMRC_PATH="${HOME}/.vimrc"
 declare -r ZSHRC_PATH="${HOME}/.zshrc"
-declare -r ZSH_DROPIN_DIR="${HOME}/.zsh.d"
+declare -r ZSH_DROPIN_DIR="${HOME}/.zshrc.d"
 
 declare -r ROOT=$(dirname $(readlink -f $0))
 
@@ -78,7 +78,6 @@ _setup_vim() {
 
 _setup_zsh() {
   _install_dir "${ZSH_DROPIN_DIR}"
-  _install_link "${ROOT}/zsh/zshrc" "$ZSHRC_PATH"
 
   # Install zprezto
   echo >&2
@@ -92,13 +91,9 @@ _setup_zsh() {
   fi
   echo >&2
 
-  for file in zlogin zlogout zprofile zshenv; do
-    _install_link "${ZDOTDIR:-$HOME}/.zprezto/runcoms/$file" "${HOME}/.$file"
+  for file in zlogin zlogout zprofile zshrc zshenv; do
+    _install_link "${ROOT}/zsh/dotfiles/${file}" "${HOME}/.${file}"
   done
-
-  _install_link "${ROOT}/zsh/zpreztorc" "${HOME}/.zpreztorc"
-
-  _install_link "${ROOT}/lc-shell/update-lc-shell.zsh" "${ZSH_DROPIN_DIR}/update-lc-shell.zsh"
 }
 
 _setup_tmux() {
