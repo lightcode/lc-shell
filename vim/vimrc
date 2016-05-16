@@ -27,16 +27,15 @@ Plugin 'godlygeek/tabular'              " Alignment
 Plugin 'tpope/vim-fugitive'             " Git
 Plugin 'airblade/vim-gitgutter'         " Git
 Plugin 'scrooloose/syntastic'           " Code checker
-Plugin 'terryma/vim-multiple-cursors'   " Multiple cursors
 
 " Language specific plugins
-Plugin 'chase/vim-ansible-yaml'         " Ansible
+Plugin 'pearofducks/ansible-vim'        " Ansible
+Plugin 'ekalinin/Dockerfile.vim'        " Dockerfile
+Plugin 'fatih/vim-go'                   " Go
 Plugin 'jelera/vim-javascript-syntax'   " JavaScript
+Plugin 'lepture/vim-jinja'              " Jinja
 Plugin 'plasticboy/vim-markdown'        " Markdown
 Plugin 'davidhalter/jedi-vim'           " Python
-Plugin 'fatih/vim-go'                   " Go
-Plugin 'lepture/vim-jinja'              " Jinja
-Plugin 'ekalinin/Dockerfile.vim'        " Docker
 
 call vundle#end()
 
