@@ -15,7 +15,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " User interface
-Plugin 'tomasr/molokai'                 " Color scheme
+Plugin 'nanotech/jellybeans.vim'        " Color scheme
 Plugin 'kien/ctrlp.vim'                 " Fuzzy search
 Plugin 'bling/vim-airline'              " Custom status bar
 Plugin 'vim-airline/vim-airline-themes' " Themes for status bar
@@ -239,7 +239,7 @@ set laststatus=2
 " Enable syntax highlighting
 if &t_Co >= 256 || has("gui_running")
     let g:rehash256 = 1
-    silent! colorscheme molokai
+    silent! colorscheme jellybeans
 endif
 
 set background=dark
