@@ -349,6 +349,7 @@ function! EnablePasteMode()
     setlocal nonumber
     setlocal nolist
     :GitGutterDisable
+    :SyntasticReset
 endfunc
 
 function! DisablePasteMode()
@@ -356,6 +357,7 @@ function! DisablePasteMode()
     setlocal number
     setlocal list
     :GitGutterEnable
+    :SyntasticCheck
 endfunc
 
 function! ToggleCopyPaste()
