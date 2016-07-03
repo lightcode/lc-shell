@@ -24,8 +24,7 @@ Plugin 'vim-airline/vim-airline-themes' " Themes for status bar
 Plugin 'scrooloose/nerdcommenter'       " Comments
 Plugin 'ervandew/supertab'              " Code completion
 Plugin 'godlygeek/tabular'              " Alignment
-Plugin 'tpope/vim-fugitive'             " Git
-Plugin 'airblade/vim-gitgutter'         " Git
+Plugin 'airblade/vim-gitgutter'         " Git gutter
 Plugin 'scrooloose/syntastic'           " Code checker
 
 " Language specific plugins
@@ -79,9 +78,8 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:12,results:12'
 
 " Setup some default ignores
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn))$',
-  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
-\}
+    \ 'dir':  '\v[\/](\.(git|hg|svn))$',
+    \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$' }
 
 " If available, use ag instead of grep to do research
 if executable("ag")
@@ -110,13 +108,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " ------------------------------------------
 
-" --> 'Raimondi/delimitMate'
-
-" let expand when we press enter key
-let delimitMate_expand_cr = 1
-
-" ------------------------------------------
-
 " --> 'scrooloose/syntastic'
 
 let g:syntastic_always_populate_loc_list = 1
@@ -138,8 +129,6 @@ let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_python_checkers = ["flake8"]
 let g:syntastic_go_checkers = ["go", "golint", "govet"]
 let g:syntastic_javascript_checkers = ["jshint"]
-
-filetype plugin on
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -232,7 +221,11 @@ set ttyfast
 if !has("gui_running")
     set mouse=
 endif
-
+" Disable blinking when we reach the first line
+autocmd GUIEnter * set vb t_vb=
+autocmd VimEnter * set vb t_vb=
+" Highlight current line number
+set cursorline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Theme
@@ -342,11 +335,21 @@ augroup END
 " => Functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""
+" Set the current buffer in text mode:
+" disable wrap, list and linebreak
+"""
+
 function! TextMode()
     setlocal wrap
     setlocal nolist
     setlocal linebreak
 endfunc
+
+
+"""
+" Functions to enable/disable paste mode
+"""
 
 function! EnablePasteMode()
     setlocal paste
@@ -382,6 +385,10 @@ autocmd BufLeave * :call ClearPasteMode()
 autocmd InsertLeave * :call ClearPasteMode()
 
 
+"""
+" Stip trailing whitespace in the current buffer
+"""
+
 function! StripTrailingWhite()
     let l:winview = winsaveview()
     silent! %s/\s\+$//
@@ -400,6 +407,10 @@ function! CountListedBuffers()
 endfunction
 
 
+"""
+" Quit if their are no buffer open
+"""
+
 function! QuitIfNoBuffer(bang)
     if CountListedBuffers() <= 1
         if a:bang
@@ -417,7 +428,3 @@ function! QuitIfNoBuffer(bang)
 endfunc
 
 command -nargs=* -range -bang GracefulQuit call QuitIfNoBuffer(<bang>0)
-
-" Disable blinking when we reach the first line
-autocmd GUIEnter * set vb t_vb=
-autocmd VimEnter * set vb t_vb=
