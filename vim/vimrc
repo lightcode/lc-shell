@@ -21,7 +21,7 @@ Plugin 'bling/vim-airline'              " Custom status bar
 Plugin 'vim-airline/vim-airline-themes' " Themes for status bar
 
 " Fast coding
-Plugin 'scrooloose/nerdcommenter'       " Comments
+Plugin 'tpope/vim-commentary.git'       " Comments
 Plugin 'ervandew/supertab'              " Code completion
 Plugin 'godlygeek/tabular'              " Alignment
 Plugin 'airblade/vim-gitgutter'         " Git gutter
@@ -283,11 +283,6 @@ inoremap <silent> <C-k><C-l> <C-o>:set list!<cr>
 " Toggle relative number on/off
 nnoremap <silent> <C-k><C-n> :set relativenumber!<cr>
 inoremap <silent> <C-k><C-n> <C-o>:set relativenumber!<cr>
-
-" Mapping for NERD Commenter
-nnoremap <silent> <C-k><C-c> :call NERDComment(0, "toggle")<cr>
-inoremap <C-k><C-c> <C-o>:call NERDComment(0, "toggle")<cr>
-vnoremap <silent> <C-k><C-c> :call NERDComment(0, "toggle")<cr>
 
 " Check the code with syntastic
 nnoremap <silent> cc :SyntasticCheck<cr> :Errors<cr>
