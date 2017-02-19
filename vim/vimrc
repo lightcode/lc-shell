@@ -14,8 +14,12 @@ call vundle#begin()
 " Vundle
 Plugin 'gmarik/Vundle.vim'
 
+" Tools
+Plugin 'chrisbra/SudoEdit.vim'          " Edit/Write via sudo
+Plugin 'reedes/vim-pencil'              " Vim as a tool writing
+
 " User interface
-Plugin 'nanotech/jellybeans.vim'        " Color scheme
+Plugin 'morhetz/gruvbox'
 Plugin 'kien/ctrlp.vim'                 " Fuzzy search
 Plugin 'bling/vim-airline'              " Custom status bar
 Plugin 'vim-airline/vim-airline-themes' " Themes for status bar
@@ -33,8 +37,9 @@ Plugin 'ekalinin/Dockerfile.vim'        " Dockerfile
 Plugin 'fatih/vim-go'                   " Go
 Plugin 'jelera/vim-javascript-syntax'   " JavaScript
 Plugin 'lepture/vim-jinja'              " Jinja
-Plugin 'plasticboy/vim-markdown'        " Markdown
+Plugin 'tpope/vim-markdown'             " Markdown
 Plugin 'davidhalter/jedi-vim'           " Python
+Plugin 'cespare/vim-toml'               " Toml
 
 call vundle#end()
 
@@ -43,7 +48,26 @@ call vundle#end()
 " => Plugins Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" --> 'fatih/vim-go'
+"""
+" Plugin 'tpope/vim-markdown'
+"""
+
+let g:markdown_fenced_languages = ['yaml', 'xml']
+let g:markdown_syntax_conceal = 0
+
+
+"""
+" Plugin 'reedes/vim-pencil'
+"""
+
+let g:pencil#autoformat = 0
+let g:pencil#conceallevel = 0
+let g:pencil#wrapModeDefault = 'soft'
+
+
+"""
+" Plugin 'fatih/vim-go'
+"""
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -56,23 +80,16 @@ if executable("goimports")
 endif
 
 
-" ------------------------------------------
-
-" --> 'davidhalter/jedi-vim'
+"""
+" Plugin 'davidhalter/jedi-vim'
+"""
 
 let g:jedi#show_call_signatures = "1"
 
 
-" ------------------------------------------
-
-" --> 'plasticboy/vim-markdown'
-
-let g:vim_markdown_folding_disabled = 1
-
-
-" ------------------------------------------
-
-" --> 'kien/ctrlp.vim'
+"""
+" Plugin 'kien/ctrlp.vim'
+"""
 
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:12,results:12'
 
@@ -91,9 +108,9 @@ if executable("ag")
 endif
 
 
-" ------------------------------------------
-
-" --> 'bling/vim-airline'
+"""
+" Plugin 'bling/vim-airline'
+"""
 
 set noshowmode
 
@@ -106,9 +123,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 
-" ------------------------------------------
-
-" --> 'scrooloose/syntastic'
+"""
+" Plugin 'scrooloose/syntastic'
+"""
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
@@ -116,7 +133,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 
 " Here we can make check active or passive.
-" I make `rst` checking passive because it doesn't
+" I made `rst` checking passive because it doesn't
 " handle Sphinx well.
 let g:syntastic_mode_map = {
     \ "mode": "active",
@@ -225,6 +242,7 @@ autocmd VimEnter * set vb t_vb=
 " Highlight current line number
 set cursorline
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Theme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -234,7 +252,7 @@ set laststatus=2
 " Enable syntax highlighting
 if &t_Co >= 256 || has("gui_running")
     let g:rehash256 = 1
-    silent! colorscheme jellybeans
+    silent! colorscheme gruvbox
 endif
 
 set background=dark
@@ -316,11 +334,10 @@ augroup LanguageConfiguration
     autocmd FileType rst           setlocal tabstop=3 shiftwidth=3 softtabstop=3 colorcolumn=120
     autocmd FileType ruby          setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType sh,zsh        setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType tex           setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType text          setlocal textwidth=0
     autocmd FileType yaml          setlocal tabstop=2 shiftwidth=2 softtabstop=2 commentstring=#\ %s
 
-    autocmd FileType mkd,rst,tex,text :call TextMode()
+    autocmd FileType markdown,mkd  call Prose() | call HugoMarkdown()
+    autocmd FileType text,tex      call Prose()
 augroup END
 
 
@@ -329,15 +346,15 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """
-" Set the current buffer in text mode:
-" disable wrap, list and linebreak
+" Set the current buffer in text mode
 """
 
-function! TextMode()
-    setlocal wrap
-    setlocal nolist
-    setlocal linebreak
-endfunc
+function! Prose()
+    call pencil#init()
+    setlocal nocursorline
+endfunction
+
+command! -nargs=0 Prose call Prose()
 
 
 """
@@ -421,3 +438,18 @@ function! QuitIfNoBuffer(bang)
 endfunc
 
 command -nargs=* -range -bang GracefulQuit call QuitIfNoBuffer(<bang>0)
+
+
+"""
+" Handle some specific highlight for Hugo
+"""
+
+function! HugoMarkdown()
+    syn region hugoFrontmatter start='^+++$' end='^+++$'
+    syn match hugoShortcode '{{.*}}'
+    syn region hugoHighlight matchgroup=hugoShortcode start='{{<highlight.*>}}' end='{{</highlight>}}'
+
+    hi link hugoShortcode Statement
+    hi link hugoHighlight markdownCode
+    hi link hugoFrontmatter Comment
+endfunction
