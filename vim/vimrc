@@ -372,17 +372,33 @@ command! -nargs=0 Prose call Prose()
 """
 
 function! EnablePasteMode()
-    setlocal paste
-    setlocal nonumber
+    let b:before_paste_wrap = &wrap
+    let b:before_paste_cursorline = &cursorline
+    let b:before_paste_colorcolumn = &colorcolumn
+    let b:before_paste_list = &list
+    let b:before_paste_number = &number
+
+    setlocal colorcolumn=0
+    setlocal nocursorline
     setlocal nolist
+    setlocal nonumber
+    setlocal wrap
+
+    setlocal paste
+
     :GitGutterDisable
     :SyntasticReset
 endfunc
 
 function! DisablePasteMode()
+    let &wrap = b:before_paste_wrap
+    let &cursorline = b:before_paste_cursorline
+    let &colorcolumn = b:before_paste_colorcolumn
+    let &list = b:before_paste_list
+    let &number = b:before_paste_number
+
     setlocal nopaste
-    setlocal number
-    setlocal list
+
     :GitGutterEnable
     :SyntasticCheck
 endfunc
