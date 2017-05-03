@@ -25,11 +25,12 @@ Plugin 'bling/vim-airline'              " Custom status bar
 Plugin 'vim-airline/vim-airline-themes' " Themes for status bar
 
 " Fast coding
-Plugin 'tpope/vim-commentary.git'       " Comments
+Plugin 'airblade/vim-gitgutter'         " Git gutter
 Plugin 'ervandew/supertab'              " Code completion
 Plugin 'godlygeek/tabular'              " Alignment
-Plugin 'airblade/vim-gitgutter'         " Git gutter
+Plugin 'lightcode/PasteMode.vim'        " Improved paste mode
 Plugin 'scrooloose/syntastic'           " Code checker
+Plugin 'tpope/vim-commentary.git'       " Comments
 
 " Language specific plugins
 Plugin 'pearofducks/ansible-vim'        " Ansible
@@ -41,12 +42,23 @@ Plugin 'tpope/vim-markdown'             " Markdown
 Plugin 'davidhalter/jedi-vim'           " Python
 Plugin 'cespare/vim-toml'               " Toml
 
+
 call vundle#end()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""
+" Plugin 'lightcode/PasteMode.vim'
+"""
+
+augroup PasteMode
+    autocmd BufLeave    * :PasteModeDisable!
+    autocmd InsertLeave * :PasteModeDisable!
+augroup END
+
 
 """
 " Plugin 'tpope/vim-markdown'
@@ -299,8 +311,8 @@ nnoremap <silent> <leader><Left> :bprevious<cr>
 nnoremap <silent> <leader><Right> :bnext<cr>
 
 " Toggle copy/paste mode
-nnoremap <silent> <C-k><C-p> :call ToggleCopyPaste()<cr>
-inoremap <C-k><C-p> <C-O>:call ToggleCopyPaste()<cr>
+nnoremap <silent> <C-k><C-p> :PasteModeToggle<cr>
+inoremap <C-k><C-p> <C-O> :PasteModeToggle<cr>
 
 " Toggle list on/off
 nnoremap <silent> <C-k><C-l> :set list!<cr>
@@ -365,60 +377,6 @@ function! Prose()
 endfunction
 
 command! -nargs=0 Prose call Prose()
-
-
-"""
-" Functions to enable/disable paste mode
-"""
-
-function! EnablePasteMode()
-    let b:before_paste_wrap = &wrap
-    let b:before_paste_cursorline = &cursorline
-    let b:before_paste_colorcolumn = &colorcolumn
-    let b:before_paste_list = &list
-    let b:before_paste_number = &number
-
-    setlocal colorcolumn=0
-    setlocal nocursorline
-    setlocal nolist
-    setlocal nonumber
-    setlocal wrap
-
-    setlocal paste
-
-    :GitGutterDisable
-    :SyntasticReset
-endfunc
-
-function! DisablePasteMode()
-    let &wrap = b:before_paste_wrap
-    let &cursorline = b:before_paste_cursorline
-    let &colorcolumn = b:before_paste_colorcolumn
-    let &list = b:before_paste_list
-    let &number = b:before_paste_number
-
-    setlocal nopaste
-
-    :GitGutterEnable
-    :SyntasticCheck
-endfunc
-
-function! ToggleCopyPaste()
-    if(&paste == 0)
-        call EnablePasteMode()
-    else
-        call DisablePasteMode()
-    endif
-endfunc
-
-function! ClearPasteMode()
-    if(&paste == 1)
-        call DisablePasteMode()
-    endif
-endfunc
-
-autocmd BufLeave * :call ClearPasteMode()
-autocmd InsertLeave * :call ClearPasteMode()
 
 
 """
