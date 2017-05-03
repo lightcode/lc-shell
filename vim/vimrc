@@ -42,7 +42,6 @@ Plugin 'tpope/vim-markdown'             " Markdown
 Plugin 'davidhalter/jedi-vim'           " Python
 Plugin 'cespare/vim-toml'               " Toml
 
-
 call vundle#end()
 
 
@@ -380,7 +379,7 @@ command! -nargs=0 Prose call Prose()
 
 
 """
-" Stip trailing whitespace in the current buffer
+" Strip trailing whitespace in the current buffer
 """
 
 function! StripTrailingWhite()
@@ -389,6 +388,10 @@ function! StripTrailingWhite()
     call winrestview(l:winview)
 endfunction
 
+
+"""
+" Quit if their are no buffer open
+"""
 
 function! CountListedBuffers()
     let cnt = 0
@@ -399,11 +402,6 @@ function! CountListedBuffers()
     endfor
     return cnt
 endfunction
-
-
-"""
-" Quit if their are no buffer open
-"""
 
 function! QuitIfNoBuffer(bang)
     if CountListedBuffers() <= 1
@@ -419,7 +417,7 @@ function! QuitIfNoBuffer(bang)
             :bdelete
         endif
     endif
-endfunc
+endfunction
 
 command -nargs=* -range -bang GracefulQuit call QuitIfNoBuffer(<bang>0)
 
