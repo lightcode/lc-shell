@@ -54,6 +54,7 @@ call vundle#end()
 """
 
 augroup PasteMode
+    autocmd!
     autocmd BufLeave    * :PasteModeDisable!
     autocmd InsertLeave * :PasteModeDisable!
 augroup END
