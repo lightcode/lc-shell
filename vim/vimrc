@@ -50,17 +50,6 @@ call vundle#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """
-" Plugin 'lightcode/PasteMode.vim'
-"""
-
-augroup PasteMode
-    autocmd!
-    autocmd BufLeave    * :PasteModeDisable!
-    autocmd InsertLeave * :PasteModeDisable!
-augroup END
-
-
-"""
 " Plugin 'tpope/vim-markdown'
 """
 
