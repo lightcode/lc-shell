@@ -35,7 +35,7 @@ Vim
 * <kbd>CTRL</kbd> + <kbd>k</kbd> and <kbd>CTRL</kbd> + <kbd>p</kbd> : enable/disable paste mode and hide/show line number
 * <kbd>,</kbd> + <kbd>w</kbd> : write
 * <kbd>,</kbd> + <kbd>q</kbd> : quit buffer
-* <kbd>CTRL</kbd> + <kbd>p</kbd> (insert mode) : open ctrlp, an extension that allow to open files
+* <kbd>CTRL</kbd> + <kbd>p</kbd> : open ctrlp, an extension that allow to open files
 * <kbd>,</kbd> + <kbd>Left</kbd>/<kbd>Right</kbd> : change buffer
 * <kbd>,</kbd> + <kbd>s</kbd> : strip trailing whitespace (remove white space at the end of lines)
 

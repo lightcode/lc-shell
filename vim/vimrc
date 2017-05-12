@@ -76,8 +76,8 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-if executable("goimports")
-    let g:go_fmt_command = "goimports"
+if executable('goimports')
+    let g:go_fmt_command = 'goimports'
 endif
 
 
@@ -85,7 +85,7 @@ endif
 " Plugin 'davidhalter/jedi-vim'
 """
 
-let g:jedi#show_call_signatures = "1"
+let g:jedi#show_call_signatures = '1'
 
 
 """
@@ -100,7 +100,7 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$' }
 
 " If available, use ag instead of grep to do research
-if executable("ag")
+if executable('ag')
     " Use Ag over Grep
     set grepprg=ag\ --nogroup\ --nocolor
 
@@ -147,16 +147,16 @@ let g:syntastic_check_on_wq = 1
 " I made `rst` checking passive because it doesn't
 " handle Sphinx well.
 let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": [],
-    \ "passive_filetypes": ["rst"] }
+    \ 'mode': 'active',
+    \ 'active_filetypes': [],
+    \ 'passive_filetypes': ['rst'] }
 
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
 
-let g:syntastic_python_checkers = ["flake8"]
-let g:syntastic_go_checkers = ["go", "golint", "govet"]
-let g:syntastic_javascript_checkers = ["jshint"]
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_go_checkers = ['go', 'golint', 'govet']
+let g:syntastic_javascript_checkers = ['jshint']
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -202,7 +202,7 @@ set tabstop=4
 " Enable indent
 filetype indent on
 " Disable auto-comments
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd BufNewFile,BufRead * setlocal formatoptions+=cqn
 " Show trailing spaces
 set list
 set listchars=trail:•,extends:#,nbsp:.,tab:\ \ ,
@@ -244,7 +244,7 @@ set sidescrolloff=5
 " We have a fast terminal
 set ttyfast
 " Disable mouse in terminal
-if !has("gui_running")
+if !has('gui_running')
     set mouse=
 endif
 " Disable blinking when we reach the first line
@@ -261,21 +261,27 @@ set cursorline
 set laststatus=2
 
 " Enable syntax highlighting
-if &t_Co >= 256 || has("gui_running")
+if &t_Co >= 256 || has('gui_running')
     let g:rehash256 = 1
     silent! colorscheme gruvbox
 endif
 
 set background=dark
 
-if &t_Co > 2 || has("gui_running")
+if &t_Co > 2 || has('gui_running')
     " Switch syntax highlighting on, when the terminal has colors
     syntax enable
 endif
 
-" Don't color background: it add trailing whitespace
-" in xfce4-terminal
+" Disable background color because it adds spaces in terminal
 highlight Normal ctermbg=none
+
+" Fix background color on SignColumn for GitGutter
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=yellow
+highlight GitGutterDelete ctermfg=red
+highlight GitGutterChangeDelete ctermfg=yellow
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -284,16 +290,16 @@ highlight Normal ctermbg=none
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
+let mapleader = ','
 
 " Fast saving
-nmap <leader>w :w!<cr>
+nnoremap <silent> <leader>w :w!<cr>
 
 " Hide highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
+nnoremap <silent> <leader><cr> :noh<cr>
 
 " Close buffer
-nnoremap <leader>q :GracefulQuit<cr>
+nnoremap <silent> <leader>q :GracefulQuit<cr>
 
 " Fast moving between buffers
 nnoremap <silent> <leader><Left> :bprevious<cr>
@@ -310,7 +316,7 @@ nnoremap <silent> cp :lprevious<cr>
 nnoremap <silent> cn :lnext<cr>
 
 " Strip trailing whitespace
-nnoremap <silent> <leader>s :call StripTrailingWhite()<cr>
+nnoremap <silent> <leader>s :call StripTrailingWhitespaces()<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -320,20 +326,15 @@ nnoremap <silent> <leader>s :call StripTrailingWhite()<cr>
 augroup LanguageConfiguration
     autocmd!
 
-    autocmd VimEnter * highlight clear SignColumn
-
     autocmd FileType plaintex      setlocal filetype=tex
 
-    autocmd FileType go            nmap <Leader>gd <Plug>(go-doc)
-
     autocmd FileType css           setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType go            nnoremap <Leader>gd <Plug>(go-doc)
     autocmd FileType html,xml      setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType java          setlocal noexpandtab formatprg=par\ -w80\ -T4
     autocmd FileType make          setlocal noexpandtab nolist
     autocmd FileType php           setlocal formatprg=par\ -w80\ -T4
-    autocmd FileType python        setlocal listchars=tab:>.,
-    autocmd FileType python        setlocal colorcolumn=79
-    autocmd FileType python        setlocal completeopt-=preview
+    autocmd FileType python        setlocal colorcolumn=79 completeopt-=preview listchars=tab:>.,
     autocmd FileType rst           setlocal tabstop=3 shiftwidth=3 softtabstop=3 colorcolumn=120
     autocmd FileType ruby          setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType sh,zsh        setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -364,7 +365,7 @@ command! -nargs=0 Prose call Prose()
 " Strip trailing whitespace in the current buffer
 """
 
-function! StripTrailingWhite()
+function! StripTrailingWhitespaces()
     let l:winview = winsaveview()
     silent! %s/\s\+$//
     call winrestview(l:winview)
