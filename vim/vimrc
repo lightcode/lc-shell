@@ -303,14 +303,6 @@ nnoremap <silent> <leader><Right> :bnext<cr>
 nnoremap <silent> <C-k><C-p> :PasteModeToggle<cr>
 inoremap <C-k><C-p> <C-O>:PasteModeToggle<cr>
 
-" Toggle list on/off
-nnoremap <silent> <C-k><C-l> :set list!<cr>
-inoremap <silent> <C-k><C-l> <C-o>:set list!<cr>
-
-" Toggle relative number on/off
-nnoremap <silent> <C-k><C-n> :set relativenumber!<cr>
-inoremap <silent> <C-k><C-n> <C-o>:set relativenumber!<cr>
-
 " Check the code with syntastic
 nnoremap <silent> cc :SyntasticCheck<cr> :Errors<cr>
 nnoremap <silent> cq :lclose<cr>

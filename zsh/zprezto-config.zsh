@@ -6,14 +6,12 @@ zstyle ':prezto:load' pmodule \
   'editor' \
   'history' \
   'directory' \
-  'spectrum' \
   'utility' \
   'completion' \
   'prompt' \
   'git' \
   'syntax-highlighting' \
   'history-substring-search' \
-  'tmux' \
   'k' \
   'docker'
 
