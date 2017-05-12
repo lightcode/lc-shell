@@ -12,14 +12,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Vundle
-Plugin 'gmarik/Vundle.vim'
+Plugin 'gmarik/Vundle.vim'              " Vim plugin manager
 
 " Tools
 Plugin 'chrisbra/SudoEdit.vim'          " Edit/Write via sudo
 Plugin 'reedes/vim-pencil'              " Vim as a tool writing
 
 " User interface
-Plugin 'morhetz/gruvbox'
+Plugin 'morhetz/gruvbox'                " Color scheme
 Plugin 'kien/ctrlp.vim'                 " Fuzzy search
 Plugin 'bling/vim-airline'              " Custom status bar
 Plugin 'vim-airline/vim-airline-themes' " Themes for status bar
