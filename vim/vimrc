@@ -335,12 +335,12 @@ augroup LanguageConfiguration
     autocmd FileType make          setlocal noexpandtab nolist
     autocmd FileType php           setlocal formatprg=par\ -w80\ -T4
     autocmd FileType python        setlocal colorcolumn=79 completeopt-=preview listchars=tab:>.,
-    autocmd FileType rst           setlocal tabstop=3 shiftwidth=3 softtabstop=3 colorcolumn=120
     autocmd FileType ruby          setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType sh,zsh        setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType yaml          setlocal tabstop=2 shiftwidth=2 softtabstop=2 commentstring=#\ %s
 
     autocmd FileType markdown,mkd  call Prose() | call HugoMarkdown()
+    autocmd FileType rst           call Prose() | setlocal tabstop=4 shiftwidth=4 softtabstop=4
     autocmd FileType text,tex      call Prose()
 augroup END
 
