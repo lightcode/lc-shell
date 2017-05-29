@@ -202,7 +202,7 @@ set tabstop=4
 " Enable indent
 filetype indent on
 " Disable auto-comments
-autocmd BufNewFile,BufRead * setlocal formatoptions+=cqn
+autocmd BufNewFile,BufRead,FileType * setlocal formatoptions-=cro
 " Show trailing spaces
 set list
 set listchars=trail:•,extends:#,nbsp:.,tab:\ \ ,
