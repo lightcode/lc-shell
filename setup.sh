@@ -77,22 +77,22 @@ _setup_vim() {
 }
 
 _setup_zsh() {
+  zplug_dir="${HOME}/.zplug"
   _install_dir "${ZSH_DROPIN_DIR}"
 
-  # Install zprezto
+  # Install zplug
   echo >&2
-  if [ -d "${ZDOTDIR:-$HOME}/.zprezto" ] && [ "$UPDATE" -eq 1 ]; then
-    echo >&2 -e "Updating Zprezto...\n"
-    _git_exec "${ZDOTDIR:-$HOME}/.zprezto" pull --depth=1 || true
-    _git_exec "${ZDOTDIR:-$HOME}/.zprezto" submodule update --init --recursive || true
-  elif [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
-    echo >&2 -e "Installing Zprezto...\n"
-    git clone --depth=1 --recursive https://github.com/lightcode/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+  if [ -d "${zplug_dir}" ] && [ "$UPDATE" -eq 1 ]; then
+    echo >&2 -e "Updating zplug...\n"
+    _git_exec "${zplug_dir}" pull --depth=1 || true
+  elif [ ! -d "${zplug_dir}" ]; then
+    echo >&2 -e "Installing zplug...\n"
+    git clone --depth=1 --recursive https://github.com/zplug/zplug "${zplug_dir}"
   fi
   echo >&2
 
-  for file in zlogin zlogout zprofile zshrc zshenv; do
-    _install_link "${ROOT}/zsh/dotfiles/${file}" "${HOME}/.${file}"
+  for file in zprofile zshrc zshenv; do
+    _install_link "${ROOT}/zsh/${file}" "${HOME}/.${file}"
   done
 }
 
