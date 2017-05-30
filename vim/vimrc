@@ -311,7 +311,7 @@ nnoremap <silent> <leader><Right> :bnext<cr>
 
 " Toggle copy/paste mode
 nnoremap <silent> <C-k><C-p> :PasteModeToggle<cr>
-inoremap <C-k><C-p> <C-O> :PasteModeToggle<cr>
+inoremap <C-k><C-p> <C-O>:PasteModeToggle<cr>
 
 " Toggle list on/off
 nnoremap <silent> <C-k><C-l> :set list!<cr>
