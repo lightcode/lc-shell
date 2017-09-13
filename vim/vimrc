@@ -34,6 +34,7 @@ Plugin 'tpope/vim-commentary.git'       " Comments
 
 " Language specific plugins
 Plugin 'pearofducks/ansible-vim'        " Ansible
+Plugin 'vim-scripts/bats.vim'           " Bats
 Plugin 'ekalinin/Dockerfile.vim'        " Dockerfile
 Plugin 'fatih/vim-go'                   " Go
 Plugin 'jelera/vim-javascript-syntax'   " JavaScript
