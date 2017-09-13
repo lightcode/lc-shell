@@ -338,6 +338,7 @@ augroup LanguageConfiguration
     autocmd FileType python        setlocal colorcolumn=79 completeopt-=preview listchars=tab:>.,
     autocmd FileType ruby          setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType sh,zsh        setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType verilog       setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType yaml          setlocal tabstop=2 shiftwidth=2 softtabstop=2 commentstring=#\ %s
 
     autocmd FileType markdown,mkd  call Prose() | call HugoMarkdown()
