@@ -19,9 +19,10 @@ Plugin 'chrisbra/SudoEdit.vim'          " Edit/Write via sudo
 Plugin 'reedes/vim-pencil'              " Vim as a tool writing
 
 " User interface
-Plugin 'morhetz/gruvbox'                " Color scheme
-Plugin 'kien/ctrlp.vim'                 " Fuzzy search
 Plugin 'bling/vim-airline'              " Custom status bar
+Plugin 'kien/ctrlp.vim'                 " Fuzzy search
+Plugin 'mileszs/ack.vim'                " Search in directory
+Plugin 'morhetz/gruvbox'                " Color scheme
 Plugin 'vim-airline/vim-airline-themes' " Themes for status bar
 
 " Fast coding
@@ -49,6 +50,15 @@ call vundle#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""
+" Plugin 'mileszs/ack.vim'
+"""
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 
 """
 " Plugin 'tpope/vim-markdown'
