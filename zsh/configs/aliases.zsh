@@ -7,8 +7,13 @@ alias rm="${aliases[rm]:-rm} -i"
 alias ls="${aliases[ls]:-ls} --color=auto"
 alias grep="${aliases[grep]:-grep} --color=auto"
 
-alias l='k -h --no-vcs'
-alias ll='l -A'
+if (( $+commands[exa] )) ; then
+  alias l='exa -lg'
+  alias ll='l -a'
+else
+  alias l='k -h --no-vcs'
+  alias ll='l -A'
+fi
 
 alias df='df -kh'
 alias du='du -kh'
