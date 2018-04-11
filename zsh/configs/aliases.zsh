@@ -16,6 +16,7 @@ alias du='du -kh'
 alias g='git'
 alias gc='git commit --verbose'
 alias gl='git log --topo-order --pretty=format:"%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B"'
+alias gls='gl --graph --pretty=oneline --abbrev-commit'
 alias gp='git push'
 alias gws='git status --ignore-submodules=none --short'
 
