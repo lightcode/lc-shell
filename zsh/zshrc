@@ -5,7 +5,6 @@
 source "${HOME}/.zplug/init.zsh"
 
 zplug "zsh-users/zsh-completions"
-zplug "supercrabtree/k"
 zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
 zplug "junegunn/fzf", as:command, use:"bin/fzf-tmux"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2

@@ -11,7 +11,7 @@ if (( $+commands[exa] )) ; then
   alias l='exa -lg'
   alias ll='l -a'
 else
-  alias l='k -h --no-vcs'
+  alias l='ls -lh'
   alias ll='l -A'
 fi
 
