@@ -58,10 +58,22 @@ function +vi-git-stashed() {
 
 function precmd() {
   vcs_info
+  k8s_prompt
+}
+
+function k8s_prompt() {
+  k8s_prompt=""
+  local kubeconfig=${KUBECONFIG:-~/.kube/config}
+  local k8s_cluster
+
+  if [[ -f "$kubeconfig" ]]; then
+    k8s_cluster=$(sed -n '/current-context: / s/current-context: //p' "$kubeconfig")
+    k8s_prompt=" %F{5}($k8s_cluster)%f"
+  fi
 }
 
 
 setopt PROMPT_SUBST
 
 PROMPT='%F{4}%3~%(!. %B%F{1}#%f%b.) %B%F{1}❯%F{3}❯%F{2}❯%f%b '
-RPROMPT='${vcs_info_msg_0_}'
+RPROMPT='${vcs_info_msg_0_}${k8s_prompt}'
