@@ -64,11 +64,12 @@ function precmd() {
 function k8s_prompt() {
   k8s_prompt=""
   local kubeconfig=${KUBECONFIG:-~/.kube/config}
-  local k8s_cluster
 
   if [[ -f "$kubeconfig" ]]; then
-    k8s_cluster=$(sed -n '/current-context: / s/current-context: //p' "$kubeconfig")
-    k8s_prompt=" %F{5}($k8s_cluster)%f"
+    local k8s_context=$(sed -n '/current-context: / s/current-context: //p' "$kubeconfig")
+    if [[ -n "$k8s_context" ]]; then
+      k8s_prompt=" %F{5}($k8s_context)%f"
+    fi
   fi
 }
 
