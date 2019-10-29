@@ -40,8 +40,11 @@ Plugin 'ekalinin/Dockerfile.vim'        " Dockerfile
 Plugin 'fatih/vim-go'                   " Go
 Plugin 'jelera/vim-javascript-syntax'   " JavaScript
 Plugin 'lepture/vim-jinja'              " Jinja
+Plugin 'google/vim-jsonnet'             " Jsonnet
 Plugin 'tpope/vim-markdown'             " Markdown
+Plugin 'LnL7/vim-nix'                   " Nix
 Plugin 'davidhalter/jedi-vim'           " Python
+Plugin 'hashivim/vim-terraform'         " Terraform
 Plugin 'cespare/vim-toml'               " Toml
 
 call vundle#end()
