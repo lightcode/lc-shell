@@ -28,10 +28,8 @@ Plugin 'vim-airline/vim-airline-themes' " Themes for status bar
 " Fast coding
 Plugin 'airblade/vim-gitgutter'         " Git gutter
 Plugin 'ervandew/supertab'              " Code completion
-Plugin 'godlygeek/tabular'              " Alignment
 Plugin 'lightcode/PasteMode.vim'        " Improved paste mode
 Plugin 'scrooloose/syntastic'           " Code checker
-Plugin 'tpope/vim-commentary.git'       " Comments
 
 " Language specific plugins
 Plugin 'pearofducks/ansible-vim'        " Ansible
@@ -43,7 +41,6 @@ Plugin 'lepture/vim-jinja'              " Jinja
 Plugin 'google/vim-jsonnet'             " Jsonnet
 Plugin 'tpope/vim-markdown'             " Markdown
 Plugin 'LnL7/vim-nix'                   " Nix
-Plugin 'davidhalter/jedi-vim'           " Python
 Plugin 'hashivim/vim-terraform'         " Terraform
 Plugin 'cespare/vim-toml'               " Toml
 
@@ -93,13 +90,6 @@ let g:go_highlight_build_constraints = 1
 if executable('goimports')
     let g:go_fmt_command = 'goimports'
 endif
-
-
-"""
-" Plugin 'davidhalter/jedi-vim'
-"""
-
-let g:jedi#show_call_signatures = '1'
 
 
 """
