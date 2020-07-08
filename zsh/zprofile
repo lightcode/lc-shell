@@ -2,29 +2,8 @@
 # Executes commands at login pre-zshrc.
 #
 
-#
-# Language
-#
-
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
+# Make sure that zshenv is loaded and anything won't be
+# override by the /etc/zprofile provided by the distro.
+if [[ -f "${HOME}/.zshenv" ]]; then
+  source "${HOME}/.zshenv"
 fi
-
-#
-# Temporary Files
-#
-
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$LOGNAME"
-  mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
-
-
-#
-# Setup PATH
-#
-
-# Export the $_PATH generated in ~/.zshenv
-export PATH="$SAVEDPATH"

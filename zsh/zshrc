@@ -48,5 +48,3 @@ fi
 if [[ -f ~/.zplug/repos/junegunn/fzf/shell/completion.zsh ]]; then
   source ~/.zplug/repos/junegunn/fzf/shell/completion.zsh
 fi
-
-unset SAVEDPATH
