@@ -20,3 +20,11 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+
+
+#
+# Setup PATH
+#
+
+# Export the $_PATH generated in ~/.zshenv
+export PATH="$SAVEDPATH"

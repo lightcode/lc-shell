@@ -47,15 +47,23 @@ fi
 # Path
 ###########################
 
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
   ${HOME}/.local/bin
   $path
 )
+
+# Load Nix profile if available.
+if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
+  source "${HOME}/.nix-profile/etc/profile.d/nix.sh"
+fi
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
+
+# Save the $PATH because it can be overwritten in /etc/zprofile on some distribs.
+export SAVEDPATH="$PATH"
 
 
 ###########################
