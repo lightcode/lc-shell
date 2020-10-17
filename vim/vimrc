@@ -339,16 +339,20 @@ augroup LanguageConfiguration
     autocmd FileType plaintex      setlocal filetype=tex
 
     autocmd FileType css           setlocal tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType go            nnoremap <Leader>gd <Plug>(go-doc)
+    autocmd FileType cue           setlocal noexpandtab tabstop=4 shiftwidth=4 listchars=tab:>.,
+    autocmd FileType go            setlocal noexpandtab tabstop=4 shiftwidth=4
     autocmd FileType html,xml      setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType java          setlocal noexpandtab formatprg=par\ -w80\ -T4
+    autocmd FileType javascript    setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType make          setlocal noexpandtab nolist
     autocmd FileType php           setlocal formatprg=par\ -w80\ -T4
     autocmd FileType python        setlocal colorcolumn=79 completeopt-=preview listchars=tab:>.,
     autocmd FileType ruby          setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType sh,zsh        setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType verilog       setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    autocmd FileType vue           setlocal tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType yaml          setlocal tabstop=2 shiftwidth=2 softtabstop=2 commentstring=#\ %s
+    autocmd FileType sql           setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
     autocmd FileType markdown,mkd  call Prose() | call HugoMarkdown()
     autocmd FileType rst           call Prose() | setlocal tabstop=4 shiftwidth=4 softtabstop=4
