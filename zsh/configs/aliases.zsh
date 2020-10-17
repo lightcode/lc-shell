@@ -7,6 +7,11 @@ alias rm="${aliases[rm]:-rm} -i"
 alias ls="${aliases[ls]:-ls} --color=auto"
 alias grep="${aliases[grep]:-grep} --color=auto"
 
+if (( $+commands[nvim] )); then
+  alias vi='nvim'
+  alias vim='nvim'
+fi
+
 if (( $+commands[exa] )) ; then
   alias l='exa -lg'
   alias ll='l -a'
