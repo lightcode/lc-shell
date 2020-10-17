@@ -34,6 +34,7 @@ Plugin 'scrooloose/syntastic'           " Code checker
 " Language specific plugins
 Plugin 'pearofducks/ansible-vim'        " Ansible
 Plugin 'vim-scripts/bats.vim'           " Bats
+Plugin 'jjo/vim-cue'                    " Cuelang
 Plugin 'ekalinin/Dockerfile.vim'        " Dockerfile
 Plugin 'fatih/vim-go'                   " Go
 Plugin 'jelera/vim-javascript-syntax'   " JavaScript
@@ -43,8 +44,11 @@ Plugin 'tpope/vim-markdown'             " Markdown
 Plugin 'LnL7/vim-nix'                   " Nix
 Plugin 'hashivim/vim-terraform'         " Terraform
 Plugin 'cespare/vim-toml'               " Toml
+Plugin 'posva/vim-vue'                  " Vue.js
 
 call vundle#end()
+
+filetype plugin indent on
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
